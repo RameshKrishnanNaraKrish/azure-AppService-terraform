@@ -17,6 +17,23 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/RameshKrishnanNaraKrish/azure-AppService-terraform.git'
             }
         }
+
+        stage('Terraform Init') {
+            steps {
+                script {
+                    if (params.PLAN_TERRAFORM) {
+                       withCredentials([azureServicePrincipal('credentials_id')]){
+                            dir('Terraform') {
+                                sh 'echo "=================Terraform init=================="'
+                                sh 'terraform init'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        
         stage('Terraform Plan') {
             steps {
                 script {
