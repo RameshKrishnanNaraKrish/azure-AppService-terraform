@@ -1,12 +1,29 @@
-resource "azurerm_static_web_app" "example" {
+resource "azurerm_service_plan" "example" {
+  name                = var.serviceplan_name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
+}
+
+
+resource "azurerm_linux_web_app" "main" {
   name                = var.appservice_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  timeouts {
-    create = "10m"
-    delete = "10m"
-    update = "10m"
-    read = "10m"
+  service_plan_id     = azurerm_service_plan.main.id
+
+  site_config {
+    app_command_line = ""
   }
-  
+
+  app_settings = {
+    "WEBSITE_RUN_FROM_PACKAGE" = "1"
+  }
+}
+
+resource "azurerm_app_service_source_control" "main" {
+  app_id     = azurerm_linux_web_app.main.id
+  branch     = "main"
+  repo_url   = "https://github.com/RameshKrishnanNaraKrish/static_website"
 }

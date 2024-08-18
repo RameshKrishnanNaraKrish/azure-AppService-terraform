@@ -19,4 +19,4 @@ override.tf.json
 .terraform/
 
 # Ignore Terraform lock file
-.terraform.locl.hcl
+*.terraform.*
