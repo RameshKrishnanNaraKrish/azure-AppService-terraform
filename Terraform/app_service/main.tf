@@ -6,12 +6,11 @@ resource "azurerm_service_plan" "example" {
   sku_name            = "P1v2"
 }
 
-
 resource "azurerm_linux_web_app" "main" {
   name                = var.appservice_name
   resource_group_name = var.resource_group_name
   location            = var.location
-  service_plan_id     = azurerm_service_plan.main.id
+  service_plan_id     = azurerm_service_plan.example.id
 
   site_config {
     app_command_line = ""
