@@ -14,7 +14,7 @@ pipeline{
     stages {
         stage('Checkout From Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/RameshKrishnanNaraKrish/E2E-1-tire-Devops'
+                git branch: 'main', url: 'https://github.com/RameshKrishnanNaraKrish/azure-AppService-terraform.git'
             }
         }
         stage('Terraform Plan') {
