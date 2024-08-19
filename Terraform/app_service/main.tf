@@ -34,7 +34,7 @@
 
 
 resource "azurerm_storage_account" "main" {
-  name                     = "mystorageaccount"
+  name                     = "tfappser-ramesh-storage"
   resource_group_name = var.resource_group_name
   location            = var.location
   account_tier             = "Standard"
