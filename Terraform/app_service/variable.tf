@@ -14,3 +14,7 @@ variable "resource_group_name" {
 variable "location" {
     description = "Azure region for resources"
 }
+variable "github_token" {
+  type = string
+  sensitive   = true
+}

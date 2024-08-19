@@ -5,3 +5,8 @@ variable "prefix" {
 variable "location" {
   default = "West Europe"
 }
+
+variable "github_token" {
+  type = string
+  sensitive   = true
+}

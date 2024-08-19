@@ -9,6 +9,7 @@ pipeline{
     
     environment {
         AZURE_CREDENTIALS = credentials('credentials_id')
+        GITHUB_TOKEN = credentials('github_token') 
     }
     
     stages {
@@ -57,9 +58,9 @@ pipeline{
                     if (params.APPLY_TERRAFORM) {
                        withCredentials([azureServicePrincipal('credentials_id')]){
                             dir('Terraform') {
-                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                                //sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Apply=================="'
-                                sh 'terraform apply -auto-approve'
+                                sh 'terraform apply -var "github_token=${GITHUB_TOKEN}" --auto-approve'
                             }
                         }
                     }
@@ -73,9 +74,9 @@ pipeline{
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([azureServicePrincipal('credentials_id')]){
                             dir('Terraform') {
-                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                                //sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Destroy=================="'
-                                sh 'terraform destroy -auto-approve'
+                                sh 'terraform destroy --auto-approve'
                             }
                         }
                     }
