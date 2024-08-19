@@ -6,7 +6,7 @@ variable "location" {
   default = "West Europe"
 }
 
-variable "github_token" {
-  type = string
-  sensitive   = true
-}
+# variable "github_token" {
+#   type = string
+#   sensitive   = true
+# }
