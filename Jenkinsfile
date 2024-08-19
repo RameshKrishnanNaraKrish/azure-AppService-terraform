@@ -44,7 +44,7 @@ pipeline{
                             dir('Terraform') {
                                 //sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Plan=================="'
-                                sh 'terraform plan'
+                                sh 'terraform plan -var "github_token=${GITHUB_TOKEN}"'
                             }
                         }
                     }
