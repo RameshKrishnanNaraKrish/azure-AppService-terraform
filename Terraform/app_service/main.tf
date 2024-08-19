@@ -45,6 +45,11 @@ resource "azurerm_storage_account" "main" {
     index_document = "index.html"
     error_404_document = "404.html"
   }
+
+  timeouts {
+    create = "10m"
+    delete = "10m"
+  }
 }
 
 resource "azurerm_storage_blob" "index" {
@@ -52,5 +57,5 @@ resource "azurerm_storage_blob" "index" {
   storage_account_name   = azurerm_storage_account.main.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "https://github.com/RameshKrishnanNaraKrish/static_website/index.html"
+  source                 = "https://github.com/RameshKrishnanNaraKrish/static_website/main/index.html"
 }
