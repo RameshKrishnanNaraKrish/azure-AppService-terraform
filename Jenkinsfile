@@ -8,7 +8,7 @@ pipeline{
     }
     
     environment {
-        AZURE_CREDENTIALS = credentials('credentials_id')
+        AZURE_CREDENTIALS = credentials('Credential_ID')
     }
     
     stages {
@@ -22,8 +22,9 @@ pipeline{
             steps {
                 script {
                     if (params.PLAN_TERRAFORM) {
-                       withCredentials([azureServicePrincipal('credentials_id')]){
+                       withCredentials([azureServicePrincipal('Credential_ID')]){
                             dir('Terraform') {
+                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform init=================="'
                                 sh 'terraform init'
                             }
@@ -38,8 +39,9 @@ pipeline{
             steps {
                 script {
                     if (params.PLAN_TERRAFORM) {
-                       withCredentials([azureServicePrincipal('credentials_id')]){
+                       withCredentials([azureServicePrincipal('Credential_ID')]){
                             dir('Terraform') {
+                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Plan=================="'
                                 sh 'terraform plan'
                             }
@@ -53,8 +55,9 @@ pipeline{
             steps {
                 script {
                     if (params.APPLY_TERRAFORM) {
-                       withCredentials([azureServicePrincipal('credentials_id')]){
+                       withCredentials([azureServicePrincipal('Credential_ID')]){
                             dir('Terraform') {
+                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Apply=================="'
                                 sh 'terraform apply -auto-approve'
                             }
@@ -70,6 +73,7 @@ pipeline{
                     if (params.DESTROY_TERRAFORM) {
                        withCredentials([azureServicePrincipal('credentials_id')]){
                             dir('Terraform') {
+                                sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Destroy=================="'
                                 sh 'terraform destroy -auto-approve'
                             }
