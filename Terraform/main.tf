@@ -6,7 +6,6 @@ module "resource_group" {
 
 }
 
-
 module "app_service" {
   source = "./app_service"
   
@@ -14,5 +13,4 @@ module "app_service" {
     serviceplan_name = "serviceplan"
     location            = module.resource_group.resource_group_location
     resource_group_name = module.resource_group.resource_group_name
-    github_token = var.github_token
 }
