@@ -1,2 +1,2 @@
 # terraform.tfvars
-github_token = "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"
+github_token = "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"
