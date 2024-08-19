@@ -44,7 +44,7 @@ pipeline{
                             dir('Terraform') {
                                 //sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
                                 sh 'echo "=================Terraform Plan=================="'
-                                sh 'terraform plan -var "github_token=${GITHUB_TOKEN}"'
+                                sh 'terraform plan'
                             }
                         }
                     }
@@ -59,8 +59,9 @@ pipeline{
                        withCredentials([azureServicePrincipal('credentials_id')]){
                             dir('Terraform') {
                                 //sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID'
+                                //sh 'terraform apply -var "github_token=${GITHUB_TOKEN}" --auto-approve'
                                 sh 'echo "=================Terraform Apply=================="'
-                                sh 'terraform apply -var "github_token=${GITHUB_TOKEN}" --auto-approve'
+                                sh 'terraform apply --auto-approve'
                             }
                         }
                     }
