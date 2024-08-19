@@ -52,5 +52,5 @@ resource "azurerm_storage_blob" "index" {
   storage_account_name   = azurerm_storage_account.main.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "https://github.com/RameshKrishnanNaraKrish/static_website/blob/main/index.html"
+  source                 = "https://github.com/RameshKrishnanNaraKrish/static_website/index.html"
 }
