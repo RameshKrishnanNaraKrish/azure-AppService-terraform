@@ -26,3 +26,8 @@ resource "azurerm_app_service_source_control" "main" {
   branch     = "main"
   repo_url   = "https://github.com/RameshKrishnanNaraKrish/static_website"
 }
+
+resource "azurerm_source_control_token" "example" {
+  type  = "GitHub"
+  token = var.github_token
+}

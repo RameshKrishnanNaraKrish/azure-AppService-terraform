@@ -14,5 +14,5 @@ module "app_service" {
     serviceplan_name = "serviceplan"
     location            = module.resource_group.resource_group_location
     resource_group_name = module.resource_group.resource_group_name
-    github_token = ""
+    github_token = var.github_token
 }
